@@ -154,3 +154,5 @@ function simulateAIResponse(prompt) {
         }, 1000);
     });
 }
+
+
