@@ -81,3 +81,7 @@ To enable live intelligence:
 - **Retry Logic**: Automatic exponential backoff for API rate limits.
 - **Graceful Failures**: User-friendly error messages with "Retry" actions.
 - **Data Safety**: All state is persisted locally; no sensitive user data is stored externally.
+
+
+
+
