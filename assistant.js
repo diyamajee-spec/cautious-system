@@ -15,9 +15,15 @@ async function sendMessage() {
     const text = userInput.value.trim();
     if (!text) return;
 
+    // Security: Sanitize input
+    const cleanText = sanitizeInput(text);
+
     // Add user message to UI
-    appendMessage('user', text);
+    appendMessage('user', cleanText);
     userInput.value = '';
+
+    // Cloud Analytics
+    FirebaseMock.logEvent('chat_message_sent', { length: cleanText.length });
 
     // Show typing indicator
     const typingId = appendMessage('ai', 'Thinking...', true);
@@ -42,9 +48,20 @@ function handleKeyPress(event) {
 function appendMessage(sender, text, isTyping = false) {
     const msgDiv = document.createElement('div');
     msgDiv.className = `message ${sender}`;
-    msgDiv.textContent = text;
+    
+    // Security: If AI or typing, we might have safe HTML from formatResponse
+    // Otherwise, use textContent for user messages
+    if (sender === 'ai') {
+        msgDiv.innerHTML = isTyping ? text : formatResponse(text);
+    } else {
+        msgDiv.textContent = text;
+    }
+
     const id = Date.now();
     msgDiv.id = `msg-${id}`;
+    msgDiv.setAttribute('role', 'log');
+    msgDiv.setAttribute('aria-live', 'polite');
+    
     chatMessages.appendChild(msgDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
     return id;

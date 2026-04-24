@@ -7,6 +7,9 @@
     <title>ElectiGuide | Your First-Time Voter Assistant (India)</title>
     <meta name="description"
         content="An interactive assistant helping first-time voters understand the election process, timelines, and steps.">
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://maps.googleapis.com https://www.googletagmanager.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://maps.gstatic.com https://*.googleapis.com; connect-src 'self' https://generativelanguage.googleapis.com https://maps.googleapis.com;">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,24 +18,33 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗳️</text></svg>">
+    
+    <!-- Google Analytics Integration -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
 </head>
 
 <body>
     <div class="app-container">
         <!-- Navigation -->
-        <nav class="glass-nav">
+        <nav class="glass-nav" role="navigation" aria-label="Main Navigation">
             <div class="logo">
-                <span class="logo-icon">🗳️</span>
+                <span class="logo-icon" aria-hidden="true">🗳️</span>
                 <span class="logo-text">ElectiGuide</span>
             </div>
             <div class="nav-links">
-                <a href="#timeline" class="active">Timeline</a>
+                <a href="#timeline" class="active" aria-current="page">Timeline</a>
                 <a href="#assistant">AI Assistant</a>
                 <a href="#map">Polling Map</a>
                 <a href="#checklist">Checklist</a>
             </div>
-            <div class="live-clock" id="live-clock">
-                <span class="pulse"></span>
+            <div class="live-clock" id="live-clock" aria-label="Current Time">
+                <span class="pulse" aria-hidden="true"></span>
                 <span id="current-time">00:00:00</span>
             </div>
         </nav>
@@ -78,10 +90,10 @@
             </section>
 
             <!-- Quiz Modal -->
-            <div id="quiz-modal" class="modal">
+            <div id="quiz-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
                 <div class="modal-content glass">
-                    <span class="close-btn" onclick="closeQuiz()">&times;</span>
-                    <h2 class="gradient-text">Civic Diagnostic</h2>
+                    <button class="close-btn" onclick="closeQuiz()" aria-label="Close Quiz">&times;</button>
+                    <h2 id="quiz-title" class="gradient-text">Civic Diagnostic</h2>
                     <p>Tell us a bit about yourself to generate your custom roadmap.</p>
                     <form id="quiz-form">
                         <div class="form-group">
@@ -146,10 +158,10 @@
                     </div>
                 </div>
 
-                <div id="milestone-details" class="milestone-details glass hidden">
+                <div id="milestone-details" class="milestone-details glass hidden" aria-live="polite">
                     <div class="milestone-header">
                         <h3 id="milestone-title">Phase 2: Registration</h3>
-                        <span class="close-milestone" onclick="hideMilestone()">&times;</span>
+                        <button class="close-milestone" onclick="hideMilestone()" aria-label="Close Milestone">&times;</button>
                     </div>
                     <p id="milestone-desc">This is where you make it official. Registering to vote is the first step in
                         ensuring your voice is heard.</p>
@@ -272,7 +284,8 @@
 
     <script src="script.js"></script>
     <script src="assistant.js"></script>
+    <script src="tests.js"></script>
     <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&v" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&v=weekly&libraries=places" async defer></script>
 </body>
 </html>
