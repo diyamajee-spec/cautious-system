@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectiGuide | Your First-Time Voter Assistant</title>
+    <meta name="description" content="An interactive assistant helping first-time voters understand the election process, timelines, and steps.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗳️</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="glass-nav">
+            <div class="logo">
+                <span class="logo-icon">🗳️</span>
+                <span class="logo-text">ElectiGuide</span>
+            </div>
+            <div class="nav-links">
+                <a href="#timeline" class="active">Timeline</a>
+                <a href="#assistant">AI Assistant</a>
+                <a href="#map">Polling Map</a>
+                <a href="#checklist">Checklist</a>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Hero Section -->
+            <section id="hero" class="hero-section">
+                <div class="hero-content">
+                    <div class="announcement">
+                        <span class="pulse"></span> New: AI Personalized Roadmap
+                    </div>
+                    <h1 class="gradient-text">Your Vote, Your Future.</h1>
+                    <p class="hero-subtitle">Navigating your first election is now easier than ever. Get a personalized civic roadmap powered by advanced AI.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="openQuiz()">Generate My Roadmap</button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('assistant')">Chat with CivicBot</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-scene">
+                        <div class="ballot-box">
+                            <div class="ballot-slot"></div>
+                            <div class="ballot-paper"></div>
+                        </div>
+                        <div class="floating-card voter-card">
+                            <div class="card-header">
+                                <span class="badge">Voter Readiness</span>
+                                <span class="status-dot online"></span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Preparation Progress</h3>
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="progress" style="width: 0%;"></div></div>
+                                <p id="progress-text" aria-live="polite">0% Completed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz Modal -->
+            <div id="quiz-modal" class="modal">
+                <div class="modal-content glass">
+                    <span class="close-btn" onclick="closeQuiz()">&times;</span>
+                    <h2 class="gradient-text">Civic Diagnostic</h2>
+                    <p>Tell us a bit about yourself to generate your custom roadmap.</p>
+                    <form id="quiz-form">
+                        <div class="form-group">
+                            <label>Have you registered yet?</label>
+                            <div class="radio-group">
+                                <input type="radio" id="reg-yes" name="registered" value="yes"><label for="reg-yes">Yes</label>
+                                <input type="radio" id="reg-no" name="registered" value="no"><label for="reg-no">No</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Which best describes your knowledge?</label>
+                            <select id="knowledge-level">
+                                <option value="beginner">Total Beginner</option>
+                                <option value="intermediate">I know the basics</option>
+                                <option value="pro">I'm ready to vote</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="generateRoadmap()">Analyze & Personalize</button>
+                    </form>
+                    <div id="roadmap-result" class="hidden">
+                        <div class="roadmap-loader"></div>
+                        <div id="roadmap-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Elevated Roadmap Section -->
+            <section id="timeline" class="roadmap-section">
+                <h2 class="section-title">Your Voter Journey</h2>
+                <div class="roadmap-visual-container">
+                    <svg class="roadmap-path-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
+                        <path id="journey-path" d="M0,200 Q250,50 500,200 T1000,200" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4" stroke-dasharray="10,10" />
+                        <path id="journey-progress" d="M0,200 Q250,50 500,200 T1000,200" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dashoffset="1000" stroke-dasharray="1000" />
+                    </svg>
+                    
+                    <div class="roadmap-nodes">
+                        <div class="node-item" style="left: 5%; top: 50%;" onclick="showMilestone(1)">
+                            <div class="node-circle completed">1</div>
+                            <div class="node-label">Eligibility</div>
+                        </div>
+                        <div class="node-item" style="left: 25%; top: 25%;" onclick="showMilestone(2)">
+                            <div class="node-circle active">2</div>
+                            <div class="node-label">Registration</div>
+                        </div>
+                        <div class="node-item" style="left: 50%; top: 50%;" onclick="showMilestone(3)">
+                            <div class="node-circle">3</div>
+                            <div class="node-label">Research</div>
+                        </div>
+                        <div class="node-item" style="left: 75%; top: 25%;" onclick="showMilestone(4)">
+                            <div class="node-circle">4</div>
+                            <div class="node-label">Polling</div>
+                        </div>
+                        <div class="node-item" style="left: 95%; top: 50%;" onclick="showMilestone(5)">
+                            <div class="node-circle">5</div>
+                            <div class="node-label">Vote!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="milestone-details" class="milestone-details glass hidden">
+                    <div class="milestone-header">
+                        <h3 id="milestone-title">Phase 2: Registration</h3>
+                        <span class="close-milestone" onclick="hideMilestone()">&times;</span>
+                    </div>
+                    <p id="milestone-desc">This is where you make it official. Registering to vote is the first step in ensuring your voice is heard.</p>
+                    <div class="milestone-action">
+                        <button class="btn btn-primary btn-sm" id="milestone-btn">Start Registration</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Assistant Section -->
+            <section id="assistant" class="assistant-section">
+                <div class="assistant-card glass">
+                    <div class="assistant-header">
+                        <div class="assistant-info">
+                            <div class="ai-avatar">🤖</div>
+                            <div>
+                                <h3>CivicBot</h3>
+                                <p>Powered by Google Gemini</p>
+                            </div>
+                        </div>
+                        <div class="pulse-indicator"></div>
+                    </div>
+                    <div id="chat-messages" class="chat-messages">
+                        <div class="message ai">
+                            Hello! I'm CivicBot. I can explain any part of the election process. Try asking "What is a primary?" or "How do I find my polling place?"
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <button class="voice-btn" id="voice-btn" onclick="toggleVoice()" aria-label="Voice Search" title="Voice Search">
+                            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path fill="currentColor" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                        </button>
+                        <input type="text" id="user-input" placeholder="Type your question or talk to me..." onkeypress="handleKeyPress(event)" aria-label="Chat with CivicBot">
+                        <button class="send-btn" onclick="sendMessage()" aria-label="Send Message">
+                            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M2.01 21L23 12L2.01 3L2 10l15 2l-15 2z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Polling Map Section -->
+            <section id="map" class="map-section">
+                <h2 class="section-title">Find Your Polling Station</h2>
+                <div class="map-container glass">
+                    <div class="map-sidebar">
+                        <div class="search-box">
+                            <input type="text" placeholder="Enter your zip code..." id="zip-search" aria-label="Zip code search">
+                            <button onclick="searchMap()" aria-label="Find Polling Booths">Search</button>
+                        </div>
+                        <div id="location-list" class="location-list">
+                            <div class="log-placeholder" style="padding: 20px; font-size: 0.9rem;">
+                                Enter a zip code to see nearby polling candidates.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-visual" id="map-visual">
+                        <!-- Google Map will be injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Checklist Section -->
+            <section id="checklist" class="checklist-section">
+                <h2 class="section-title">Your Voting Checklist</h2>
+                <div class="checklist-grid">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check1">
+                        <label for="check1">Check Registration Status</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check2">
+                        <label for="check2">Register to Vote</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check3">
+                        <label for="check3">Find Polling Location</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check4">
+                        <label for="check4">Bring Valid ID</label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activity Log Section -->
+            <section id="activity" class="log-section">
+                <div class="section-header-flex">
+                    <h2 class="section-title">Civic Activity Log</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="clearLogs()">Clear History</button>
+                </div>
+                <div class="log-container glass">
+                    <div id="log-entries" class="log-entries">
+                        <div class="log-placeholder">Your civic journey will be recorded here...</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="glass-footer">
+            <p>&copy; 2026 ElectiGuide. Empowering the next generation of voters.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Accessibility</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="assistant.js"></script>
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap&v=weekly" defer></script>
+</body>
+</html>
