@@ -1,18 +1,27 @@
 # OS metadata
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # IDEs and editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
 
 # Local server logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Environment / Secrets
+.env
+.env.local
+.env.*.local
+*.env
 
 # Deployment / Build artifacts
 dist/
@@ -23,3 +32,9 @@ node_modules/
 
 # Cloud Run / GCloud
 .gcloud/
+
+# AI / Assistant specific
+.gemini/
+.antigravity/
+browser_recordings/
+screenshots/

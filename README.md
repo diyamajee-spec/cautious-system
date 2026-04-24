@@ -7,9 +7,9 @@ ElectiGuide is a state-of-the-art civic tech platform designed to turn first-tim
 ## 🏆 Core Features
 
 ### 🧠 1. AI-Powered Personalized Roadmap
-Using a sophisticated **Diagnostic Quiz**, the assistant leverages **Google Gemini** to analyze the user's specific readiness and generate a bespoke 3-step preparation plan.
+Using a sophisticated **Diagnostic Quiz**, the assistant leverages **Google Gemini 3 Flash** to analyze the user's specific readiness and generate a bespoke 3-step preparation plan.
 - **Dynamic Logic**: Automatically updates the user's checklist based on their diagnostic results.
-- **Deep Personalization**: Adapts to the user's state and knowledge level.
+- **Deep Personalization**: Adapts to the user's state and knowledge level for the Indian electoral context.
 
 ### 🎙️ 2. Multimodal Interaction (Voice + Text)
 ElectiGuide breaks accessibility barriers by integrating the **Web Speech API**. 
@@ -18,11 +18,12 @@ ElectiGuide breaks accessibility barriers by integrating the **Web Speech API**.
 
 ### 📍 3. Interactive Polling Navigator
 A custom-built, premium **Polling Map** integration that helps users visualize their destination.
-- **Zip-Code Search**: Dynamic search using Google Maps & Places API.
+- **Pincode Search**: Dynamic search using Google Maps & Places API, tailored for Indian locations.
 - **Visual Pins**: Interactive map pins that link to specific location details.
 
 ### 🎨 4. Premium Motion Design & 3D Visuals
-- **Ballot Box Animation**: A custom pure-CSS 3D ballot box with a smooth paper-insertion animation.
+- **Live Digital Clock**: A real-time, pulsing clock in the navigation bar to emphasize the "live" nature of the election window.
+- **Ballot Box Animation**: A custom pure-CSS 3D animation symbolizing the act of voting in the world's largest democracy.
 - **Celebration Engine**: A custom confetti system that triggers upon 100% preparation.
 - **Glassmorphism 2.0**: Professional SaaS-grade depth and blur effects.
 

@@ -1,12 +1,14 @@
 @echo off
-TITLE ElectiGuide Local Server
-echo 🚀 Starting ElectiGuide Local Server...
+TITLE ElectiGuide India Local Server
+echo ===============================================
+echo 🗳️  Starting ElectiGuide (India Edition) Server
+echo ===============================================
 
 :: Try npx serve first
 where npx >nul 2>nul
 if %errorlevel% == 0 (
     echo ✅ npx detected. Starting server with 'npx serve'...
-    npx serve .
+    npx -y serve .
     exit /b
 )
 

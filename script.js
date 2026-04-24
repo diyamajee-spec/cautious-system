@@ -282,8 +282,8 @@ function toggleVoice() {
 
 // Map Logic
 async function searchMap() {
-    const zip = document.getElementById('zip-search').value;
-    if (!zip) return;
+    const pincode = document.getElementById('zip-search').value;
+    if (!pincode) return;
 
     const list = document.getElementById('location-list');
     list.style.opacity = '0.5';
@@ -295,22 +295,22 @@ async function searchMap() {
             list.style.opacity = '1';
             list.innerHTML = `
                 <div class="location-item active" role="button" tabindex="0">
-                    <h4>City Hall Library (Mock)</h4>
-                    <p>123 Democracy Ave</p>
-                    <span class="distance">0.5 miles away</span>
+                    <h4>KV School No. 1 (Mock)</h4>
+                    <p>Sector 4, Central Colony</p>
+                    <span class="distance">0.8 km away</span>
                 </div>
                 <div class="location-item" role="button" tabindex="0">
-                    <h4>Lincoln High School (Mock)</h4>
-                    <p>456 Liberty St</p>
-                    <span class="distance">1.2 miles away</span>
+                    <h4>City Community Center (Mock)</h4>
+                    <p>Main Market Road</p>
+                    <span class="distance">1.5 km away</span>
                 </div>
             `;
-            logAction('polling', `Searched for polling booths near ${zip} (Offline Mode). Found 2 mock locations.`);
+            logAction('polling', `Searched for polling booths near ${pincode} (Offline Mode). Found 2 mock locations.`);
         }, 800);
         return;
     }
 
-    state.geocoder.geocode({ address: zip }, (results, status) => {
+    state.geocoder.geocode({ address: pincode }, (results, status) => {
         if (status === 'OK') {
             const location = results[0].geometry.location;
             state.map.setCenter(location);
@@ -368,7 +368,7 @@ async function searchMap() {
                         list.appendChild(item);
                     });
 
-                    logAction('polling', `Found ${places.length} potential polling sites near ${zip}.`);
+                    logAction('polling', `Found ${places.length} potential polling sites near ${pincode}.`);
                 }
             });
         } else {
@@ -557,9 +557,28 @@ function initApp() {
     updateLogUI();
 }
 
+function updateClock() {
+    const timeEl = document.getElementById('current-time');
+    if (!timeEl) return;
+    
+    const now = new Date();
+    timeEl.textContent = now.toLocaleTimeString('en-IN', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    });
+}
+
 // Run initialization
-document.addEventListener('DOMContentLoaded', initApp);
+document.addEventListener('DOMContentLoaded', () => {
+    initApp();
+    updateClock();
+    setInterval(updateClock, 1000);
+});
 // If content already loaded (e.g. script is at bottom)
 if (document.readyState !== 'loading') {
     initApp();
+    updateClock();
+    setInterval(updateClock, 1000);
 }

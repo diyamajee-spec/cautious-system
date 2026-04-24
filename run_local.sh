@@ -1,18 +1,22 @@
 #!/bin/bash
 
 # run_local.sh - ElectiGuide Local Server Starter
-# This script attempts to start a local development server.
+# -----------------------------------------------
+# This script initializes the ElectiGuide environment 
+# and starts a local development server for testing.
 
-echo "🚀 Starting ElectiGuide Local Server..."
+echo "==============================================="
+echo "🗳️  Starting ElectiGuide (India Edition) Server"
+echo "==============================================="
 
 # Try npx serve first (modern JS approach)
 if command -v npx &>/dev/null; then
-    echo "✅ npx detected. Starting server with 'npx serve'..."
-    npx serve .
+    echo "✅ npx detected. Launching high-performance server..."
+    npx -y serve .
     exit 0
 fi
 
-# Fallback to Python
+# Fallback to Python 3
 if command -v python3 &>/dev/null; then
     echo "✅ Python 3 detected. Starting server on http://localhost:8000"
     python3 -m http.server 8000
@@ -23,7 +27,7 @@ elif command -v python &>/dev/null; then
         echo "✅ Python 3 detected. Starting server on http://localhost:8000"
         python -m http.server 8000
     else
-        echo "✅ Python 2 detected. Starting server on http://localhost:8000"
+        echo "✅ Python 2 detected. Starting legacy server on http://localhost:8000"
         python -m SimpleHTTPServer 8000
     fi
 else

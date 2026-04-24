@@ -5,7 +5,7 @@ const API_CONFIG = {
     // In a real application, this should be handled via a secure backend
     // For this hackathon demonstration, we provide the structure
     KEY: "YOUR_GEMINI_API_KEY",
-    MODEL: "gemini-1.5-flash"
+    MODEL: "gemini-3-flash-preview"
 };
 
 const chatMessages = document.getElementById('chat-messages');
@@ -119,38 +119,37 @@ function simulateAIResponse(prompt) {
             const p = prompt.toLowerCase();
             if (p.includes('roadmap') && p.includes('not registered')) {
                 resolve(`**Step 1: Confirm Your Eligibility**
-* You must be a U.S. citizen, at least 18 years old on election day, and meet your state's residency requirements.
+* You must be an Indian citizen, at least 18 years old on the qualifying date (usually Jan 1st of the year), and a resident of the polling area.
 
-**Step 2: Choose Your Registration Method**
-* Online: Fast and easy at Vote.gov (available in 40+ states).
-* In-Person: Visit your local DMV, post office, or election office.
-* Mail: Download and send the National Mail Voter Registration Form.
+**Step 2: Apply via Form 6**
+* Visit the **NVSP Portal (voters.eci.gov.in)** or use the Voter Helpline App.
+* Fill out **Form 6** for new registration. It's free and can be done entirely online!
 
-**Step 3: Gather Required Documents**
-* Most states require a valid Driver's License or a Social Security number. Have these ready before you start!
+**Step 3: Upload Required Documents**
+* You'll need a passport-sized photo, Age Proof (Aadhaar, PAN, Passport), and Address Proof (Aadhaar, Utility bill, Bank passbook).
 
-**Step 4: Meet the Deadlines**
-* Many states require registration 15 to 30 days before the election. Don't wait—register today to ensure your voice is heard!`);
+**Step 4: Track Your Application**
+* Once submitted, you'll get a reference ID. A Booth Level Officer (BLO) will visit for verification, and your EPIC (Voter ID) card will be issued shortly after!`);
             } else if (p.includes('roadmap')) {
-                resolve(`**Step 1: Deep Research**
-* Dive into non-partisan guides like Vote411 to compare candidate platforms.
+                resolve(`**Step 1: Research Your Candidates**
+* Use the **Know Your Candidate (KYC)** app or check the ECI portal for candidate affidavits to understand their background and assets.
 
-**Step 2: Verify Your Polling Place**
-* Use our map tool to find your exact voting location or local drop boxes.
+**Step 2: Verify Your Polling Booth**
+* Use our map tool or visit the **Voter Search** portal to find your exact Part Number and Serial Number in the electoral roll.
 
-**Step 3: Review Voter ID Laws**
-* Double-check if your state requires a photo ID or other documents.
+**Step 3: Review ID Requirements**
+* Carry your **EPIC (Voter ID) card**. If you don't have it, the ECI accepts 12 alternative photo IDs, including Aadhaar, PAN card, and MNREGA Job Card.
 
-**Step 4: Plan Your Trip**
-* Decide when you'll go and how you'll get there. Making a plan increases your likelihood of voting!`);
-            } else if (p.includes('primary')) {
-                resolve("A primary election is how political parties choose their candidate for the general election. Think of it like the 'semi-finals' of voting!");
+**Step 4: Understand the EVM/VVPAT**
+* Familiarize yourself with the Electronic Voting Machine and the VVPAT slip verification process to ensure your vote is recorded correctly.`);
+            } else if (p.includes('primary') || p.includes('election type')) {
+                resolve("In India, we primarily have General Elections (Lok Sabha) every 5 years to choose the Prime Minister, and State Assembly Elections (Vidhan Sabha) for the Chief Minister.");
             } else if (p.includes('register')) {
-                resolve("You can usually register online, by mail, or in person at your local election office. Deadlines vary by state, but most are 15-30 days before the election.");
-            } else if (p.includes('id')) {
-                resolve("Requirements for ID vary by state. Some require a photo ID, while others accept non-photo IDs like a utility bill. Check your state's official election website for the most accurate info.");
+                resolve("Registration is simple! Go to **voters.eci.gov.in**, sign up, and fill out **Form 6**. You'll need basic ID and address proof. The whole process is digital now.");
+            } else if (p.includes('id') || p.includes('epic')) {
+                resolve("The EPIC (Electronic Photo Identity Card) is your primary voter ID. If you haven't received yours yet, you can download a digital **e-EPIC** from the NVSP portal, or use any of the 12 ECI-approved alternative photo IDs on election day.");
             } else {
-                resolve("That's a great question about the election process! As a first-time voter, it's important to know the steps. Is there a specific part of the timeline you're curious about?");
+                resolve("That's a great question about the Indian democratic process! As a first-time voter, it's important to know the steps for registration and voting. Is there a specific part of the ECI guidelines you're curious about?");
             }
         }, 1000);
     });

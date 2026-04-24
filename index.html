@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElectiGuide | Your First-Time Voter Assistant (India)</title>
-    <meta name="description" content="An interactive assistant helping first-time voters understand the election process, timelines, and steps.">
+    <meta name="description"
+        content="An interactive assistant helping first-time voters understand the election process, timelines, and steps.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗳️</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗳️</text></svg>">
 </head>
+
 <body>
     <div class="app-container">
         <!-- Navigation -->
@@ -25,6 +31,10 @@
                 <a href="#map">Polling Map</a>
                 <a href="#checklist">Checklist</a>
             </div>
+            <div class="live-clock" id="live-clock">
+                <span class="pulse"></span>
+                <span id="current-time">00:00:00</span>
+            </div>
         </nav>
 
         <main>
@@ -35,10 +45,12 @@
                         <span class="pulse"></span> New: AI Personalized Roadmap
                     </div>
                     <h1 class="gradient-text">Your Vote, Your Future.</h1>
-                    <p class="hero-subtitle">Navigating your first election is now easier than ever. Get a personalized civic roadmap powered by advanced AI.</p>
+                    <p class="hero-subtitle">Navigating your first election is now easier than ever. Get a personalized
+                        civic roadmap powered by advanced AI.</p>
                     <div class="hero-actions">
                         <button class="btn btn-primary" onclick="openQuiz()">Generate My Roadmap</button>
-                        <button class="btn btn-secondary" onclick="scrollToSection('assistant')">Chat with CivicBot</button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('assistant')">Chat with
+                            CivicBot</button>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -54,7 +66,10 @@
                             </div>
                             <div class="card-body">
                                 <h3>Preparation Progress</h3>
-                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="progress" style="width: 0%;"></div></div>
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <div class="progress" style="width: 0%;"></div>
+                                </div>
                                 <p id="progress-text" aria-live="polite">0% Completed</p>
                             </div>
                         </div>
@@ -72,8 +87,10 @@
                         <div class="form-group">
                             <label>Have you registered yet?</label>
                             <div class="radio-group">
-                                <input type="radio" id="reg-yes" name="registered" value="yes"><label for="reg-yes">Yes</label>
-                                <input type="radio" id="reg-no" name="registered" value="no"><label for="reg-no">No</label>
+                                <input type="radio" id="reg-yes" name="registered" value="yes"><label
+                                    for="reg-yes">Yes</label>
+                                <input type="radio" id="reg-no" name="registered" value="no"><label
+                                    for="reg-no">No</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -84,7 +101,8 @@
                                 <option value="pro">I'm ready to vote</option>
                             </select>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="generateRoadmap()">Analyze & Personalize</button>
+                        <button type="button" class="btn btn-primary" onclick="generateRoadmap()">Analyze &
+                            Personalize</button>
                     </form>
                     <div id="roadmap-result" class="hidden">
                         <div class="roadmap-loader"></div>
@@ -98,10 +116,12 @@
                 <h2 class="section-title">Your Voter Journey</h2>
                 <div class="roadmap-visual-container">
                     <svg class="roadmap-path-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
-                        <path id="journey-path" d="M0,200 Q250,50 500,200 T1000,200" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4" stroke-dasharray="10,10" />
-                        <path id="journey-progress" d="M0,200 Q250,50 500,200 T1000,200" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dashoffset="1000" stroke-dasharray="1000" />
+                        <path id="journey-path" d="M0,200 Q250,50 500,200 T1000,200" fill="none"
+                            stroke="rgba(255,255,255,0.1)" stroke-width="4" stroke-dasharray="10,10" />
+                        <path id="journey-progress" d="M0,200 Q250,50 500,200 T1000,200" fill="none"
+                            stroke="var(--primary)" stroke-width="6" stroke-dashoffset="1000" stroke-dasharray="1000" />
                     </svg>
-                    
+
                     <div class="roadmap-nodes">
                         <div class="node-item" style="left: 5%; top: 50%;" onclick="showMilestone(1)">
                             <div class="node-circle completed">1</div>
@@ -131,7 +151,8 @@
                         <h3 id="milestone-title">Phase 2: Registration</h3>
                         <span class="close-milestone" onclick="hideMilestone()">&times;</span>
                     </div>
-                    <p id="milestone-desc">This is where you make it official. Registering to vote is the first step in ensuring your voice is heard.</p>
+                    <p id="milestone-desc">This is where you make it official. Registering to vote is the first step in
+                        ensuring your voice is heard.</p>
                     <div class="milestone-action">
                         <button class="btn btn-primary btn-sm" id="milestone-btn">Start Registration</button>
                     </div>
@@ -153,19 +174,31 @@
                     </div>
                     <div id="chat-messages" class="chat-messages">
                         <div class="message ai">
-                            Hello! I'm CivicBot. I can explain any part of the election process. Try asking "What is a primary?" or "How do I find my polling place?"
+                            <div class="avatar">🤖</div>
+                            <div class="text">Hello! I'm CivicBot. I can explain any part of the Indian election
+                                process. Try asking
+                                "What is the Lok Sabha?" or "How do I find my polling booth?"
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <button class="voice-btn" id="voice-btn" onclick="toggleVoice()" aria-label="Voice Search"
+                                title="Voice Search">
+                                <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                                    <path fill="currentColor"
+                                        d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                                </svg>
+                            </button>
+                            <input type="text" id="user-input" placeholder="Type your question or talk to me..."
+                                onkeypress="handleKeyPress(event)" aria-label="Chat with CivicBot">
+                            <button class="send-btn" onclick="sendMessage()" aria-label="Send Message">
+                                <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                                    <path fill="currentColor" d="M2.01 21L23 12L2.01 3L2 10l15 2l-15 2z" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                    <div class="chat-input-area">
-                        <button class="voice-btn" id="voice-btn" onclick="toggleVoice()" aria-label="Voice Search" title="Voice Search">
-                            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path fill="currentColor" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-                        </button>
-                        <input type="text" id="user-input" placeholder="Type your question or talk to me..." onkeypress="handleKeyPress(event)" aria-label="Chat with CivicBot">
-                        <button class="send-btn" onclick="sendMessage()" aria-label="Send Message">
-                            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M2.01 21L23 12L2.01 3L2 10l15 2l-15 2z"/></svg>
-                        </button>
-                    </div>
-                </div>
             </section>
 
             <!-- Polling Map Section -->
@@ -174,7 +207,8 @@
                 <div class="map-container glass">
                     <div class="map-sidebar">
                         <div class="search-box">
-                            <input type="text" placeholder="Enter your Pincode..." id="zip-search" aria-label="Pincode search">
+                            <input type="text" placeholder="Enter your Pincode..." id="zip-search"
+                                aria-label="Pincode search">
                             <button onclick="searchMap()" aria-label="Find Polling Booths">Search</button>
                         </div>
                         <div id="location-list" class="location-list">
@@ -239,6 +273,7 @@
     <script src="script.js"></script>
     <script src="assistant.js"></script>
     <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&v" async defer></script>
 </body>
+
 </html>
